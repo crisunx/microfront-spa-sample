@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  root:
+    container_name: root
+    build:
+      context: ./root
+    ports:
+      - "9000:80"
+    links:
+      - navbar
+      - cards
+      - payments
+      - bank
+    networks:
+      - network
+
+  navbar:
+    container_name: navbar
+    build:
+      context: ./navbar
+    ports:
+      - "8080:80"
+    networks:
+      - network
+
+  cards:
+    container_name: cards
+    build:
+      context: ./cards
+    ports:
+      - "8081:80"
+    networks:
+      - network
+
+  payments:
+    container_name: payments
+    build:
+      context: ./payments
+    ports:
+      - "8082:80"
+    networks:
+      - network
+
+  bank:
+    container_name: bank
+    build:
+      context: ./bank
+    ports:
+      - "5000:80"
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
